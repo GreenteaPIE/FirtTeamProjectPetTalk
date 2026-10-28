@@ -8,18 +8,13 @@ import java.sql.SQLException;
 public class UserDAO { // Data Access Object
 	// singleton pattern : 단 한개의 객체만을 가지고 구현(설계) 한다 .
 
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://127.0.0.1:3306/Mini"; // 벤치 데이터베이스 이름!!
-	private static final String USER = "root";
-	private static final String PASS = "1234";
 
 	UserDTO userDTO;
 
 	public Connection getConn() {
 		Connection con = null;
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASS);
+			con = Db.connect();
 			System.out.println("접속 성공");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -150,9 +145,11 @@ public class UserDAO { // Data Access Object
 			pstmt.setString(6, dto.getUserAddress());
 			result = pstmt.executeUpdate();
 
-			String userId = dto.getUserId();
-			String insertSql = "INSERT INTO Friendlist (fId) VALUES ('" + userId + "')";
-			pstmt.executeUpdate(insertSql);
+			// 아이디를 문자열로 이어 붙이면 SQL 인젝션이 되므로 PreparedStatement 로 넣는다
+			pstmt.close();
+			pstmt = con.prepareStatement("INSERT INTO Friendlist (fId) VALUES (?)");
+			pstmt.setString(1, dto.getUserId());
+			pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -181,9 +178,6 @@ public class UserDAO { // Data Access Object
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			// Connection conn =
-			// DriverManager.getConnection("jdbc:mysql://localhost:3306/Mini", "root",
-			// "1234");
 			// String userId = logInUserId;
 			// System.out.println("userdao에 저장된 userId: " + userId);
 			con = getConn();

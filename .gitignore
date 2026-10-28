@@ -1,0 +1,9 @@
+# 빌드 결과물
+target/
+bin/
+# IDE 설정 (Maven 프로젝트로 가져오면 다시 만들어진다)
+.classpath
+.project
+.settings/
+.idea/
+*.iml

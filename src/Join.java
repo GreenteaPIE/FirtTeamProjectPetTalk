@@ -389,7 +389,7 @@ class Join extends JFrame implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
 		if ((JButton) obj == jbJoin) {
-			jbJoin.setIcon(new ImageIcon("jbJoin.png")); // 클릭하면 이미지 변경
+			jbJoin.setIcon(new ImageIcon("jbjoin.png")); // 클릭하면 이미지 변경
 		}
 		if ((JButton) obj == jbReset) {
 			jbReset.setIcon(new ImageIcon("cancel.png")); // 클릭하면 이미지 변경

@@ -1,3 +1,37 @@
+# 🐾 Pet Talk
+
+반려인들이 서로 친구를 맺고 대화하는 **Java Swing 채팅 프로그램**입니다. 웹 개발 교육 과정의 첫 팀 프로젝트(5인, 2023.03.15 ~ 03.21)로 만들었습니다.
+
+- 회원가입·로그인, 내 정보와 반려동물 정보 등록
+- 소켓 기반 다중 접속 채팅과 귓속말, 친구 추가
+- 그림판, 동물병원 찾기, 관리자 회원 관리
+
+## 실행하기
+
+**필요한 것**: JDK 11 이상, Maven, MySQL 8
+
+1. DB 만들기
+   ```bash
+   mysql -u root -p < schema.sql
+   ```
+2. DB 접속 정보 설정 (코드에 비밀번호를 넣지 않도록 환경 변수로 받습니다)
+   ```bash
+   export PETTALK_DB_PASSWORD=내_MySQL_비밀번호
+   # 필요하면: PETTALK_DB_URL (기본 jdbc:mysql://localhost:3306/Mini), PETTALK_DB_USER (기본 root)
+   ```
+3. 채팅 서버 실행 (포트 9888)
+   ```bash
+   mvn -q compile exec:java -Dexec.mainClass=PetChatServer
+   ```
+4. 다른 터미널에서 프로그램 실행 (이미지 파일을 쓰므로 저장소 최상위 폴더에서 실행)
+   ```bash
+   mvn -q compile exec:java
+   ```
+
+Eclipse 에서는 **File → Import → Existing Maven Projects** 로 가져오면 됩니다.
+
+---
+
 > **사용한 플랫폼 : Eclipse, MySQL**
 
 
@@ -69,7 +103,7 @@ DB 설계와 메인 틀을 먼저 잡은 후<br>회원 가입과 로그인 기�
 
 ### 4. DB 설계
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/db.png)
+![db](https://greenteapie.github.io/img/PetTalk/db.png)
 
 ### 5. 역할 분담
 
@@ -94,15 +128,15 @@ DB 설계와 메인 틀을 먼저 잡은 후<br>회원 가입과 로그인 기�
 
 #### 회원 가입<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/join.png)
+![join](https://greenteapie.github.io/img/PetTalk/join.png)
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/joinsucs.png)
+![joinsucs](https://greenteapie.github.io/img/PetTalk/joinsucs.png)
 
 중복된 ID는 가입 할 수 없다.
 
-#### 로그인<br>![_config.yml]({{ site.baseurl }}/img/PetTalk/mainlogin.png)
+#### 로그인<br>![mainlogin](https://greenteapie.github.io/img/PetTalk/mainlogin.png)
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/login.png)
+![login](https://greenteapie.github.io/img/PetTalk/login.png)
 
 ID 와 PASSWORD 가 일치해야 로그인이 가능 하다.
 
@@ -114,35 +148,35 @@ ID 와 PASSWORD 가 일치해야 로그인이 가능 하다.
 
 #### 나의 정보(반려 동물 정보 입력)<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/petup.jpg)
+![petup](https://greenteapie.github.io/img/PetTalk/petup.jpg)
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/myinfo.jpg)
+![myinfo](https://greenteapie.github.io/img/PetTalk/myinfo.jpg)
 
 회원 가입 시에 입력한 정보를 불러오고 반려 동물 정보를 추가로 입력하면 반려 동물의 정보도 불러온다.
 
 #### 채팅<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/chat.jpg)
+![chat](https://greenteapie.github.io/img/PetTalk/chat.jpg)
 
 닉네임을 설정하고 입장하면 입장한 유저들과 대화를 할 수 있다.
 
 #### 동물 병원 정보<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/petho.jpg)
+![petho](https://greenteapie.github.io/img/PetTalk/petho.jpg)
 
 하이퍼링크를 통해 모든 동물 병원의 정보를 검색할 수 있는 홈페이지로 이동한다.
 
 #### 그림 판<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/draw.jpg)
+![draw](https://greenteapie.github.io/img/PetTalk/draw.jpg)
 
 팬 색과 굵기, 지우개와 굵기를 설정하여 그림을 그릴 수 있다.
 
 #### 관리자<br>
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/adminlogin.jpg)
+![adminlogin](https://greenteapie.github.io/img/PetTalk/adminlogin.jpg)
 
-![_config.yml]({{ site.baseurl }}/img/PetTalk/admin.jpg)
+![admin](https://greenteapie.github.io/img/PetTalk/admin.jpg)
 
 가입한 유저들의 정보를 보고 관리 할 수 있다.
 

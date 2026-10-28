@@ -147,11 +147,7 @@ public class MainFrame extends JFrame implements ActionListener { // 로그인 �
 					return;
 				}
 
-				String furl = "jdbc:mysql://localhost:3306/Mini";
-				String fuser = "root";
-				String fpassword = "1234";
-
-				try (Connection conn = DriverManager.getConnection(furl, fuser, fpassword)) {
+				try (Connection conn = Db.connect()) {
 					String selectSql = "SELECT * FROM Breeder WHERE userId = ?";
 					PreparedStatement selectStmt = conn.prepareStatement(selectSql);
 					selectStmt.setString(1, friendId);
@@ -557,7 +553,7 @@ public class MainFrame extends JFrame implements ActionListener { // 로그인 �
 			System.out.println("현재 로그인된 userId: " + loggedInUserId);
 
 			try {
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Mini", "root", "1234");
+				Connection conn = Db.connect();
 
 				// Breeder와 Pet 테이블에서 데이터 가져오기
 				String query = "SELECT b.userName, b.userAge, b.userNum, b.userAddress, p.petName, p.petAge, p.petSex, p.petBreed "

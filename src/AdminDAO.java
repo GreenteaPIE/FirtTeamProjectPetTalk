@@ -9,16 +9,11 @@ import com.mysql.cj.xdevapi.Statement;
 public class AdminDAO { // Data Access Object
 	// singleton pattern : 단 한개의 객체만을 가지고 구현(설계) 한다 .
 
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://127.0.0.1:3306/Mini"; // 벤치 데이터베이스 이름!!
-	private static final String USER = "root";
-	private static final String PASS = "1234";
 
 	public Connection getConn() {
 		Connection con = null;
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASS);
+			con = Db.connect();
 			System.out.println("접속 성공");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -78,7 +73,7 @@ public class AdminDAO { // Data Access Object
 	}
 
 	// 여기서부터 로그인 함수까지 출처 : https://chaengstory.tistory.com/48
-	private final String LOGIN = "select * from adminn where adminId=? and adminPw=?";
+	private final String LOGIN = "select * from admin where adminId=? and adminPw=?";
 
 	AdminDAO() {
 	}
